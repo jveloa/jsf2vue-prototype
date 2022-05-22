@@ -2,5 +2,11 @@ import QuestionnaireLayout from '@/modules/questionnaire/layout/QuestionnaireLay
 export default {
 	name: 'questionnaire',
 	component :  QuestionnaireLayout,
-
+	children: [
+		{
+			path: '',
+			name: 'questionnaire-form',
+			component: () => import(/* webpackChunkName: "questionnaire-fomr" */'@/modules/questionnaire/views/QuestionnaireView.vue')
+		}
+	]
 }

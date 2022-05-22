@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router'
-import '/node_modules/primeflex/primeflex.min.css'
-import '/node_modules/primeflex/themes/vela-blue.css'
+import PrimeVue from 'primevue/config'
+import { createPinia } from 'pinia'
 
-createApp(App).use(router).mount('#app')
+
+
+createApp(App).use(createPinia()).use(PrimeVue).use(router).mount('#app')

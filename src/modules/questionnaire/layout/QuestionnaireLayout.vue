@@ -1,10 +1,20 @@
 <template>
-    <h1>Layout</h1>
+    <NavBar/>
+	<OptionNav/>
+	<div class="m-4 border-round-xl  shadow-4" >
+		<router-view/>
+	</div>
 </template>
 
 <script>
-export default {};
+import NavBar from '@/modules/admin/components/NavBar.vue'
+import OptionNav from '@/modules/admin/components/OptionNav.vue'
+export default {
+	components: {NavBar,OptionNav},
+};
 </script>
 
-<style>
+<style scope>
+	
+
 </style>
