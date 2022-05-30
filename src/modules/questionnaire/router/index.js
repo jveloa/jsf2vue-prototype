@@ -1,6 +1,6 @@
 import QuestionnaireLayout from '@/modules/questionnaire/layout/QuestionnaireLayout.vue'
 export default {
-	name: 'questionnaire',
+	name:'questionnaire',
 	component :  QuestionnaireLayout,
 	children: [
 		{

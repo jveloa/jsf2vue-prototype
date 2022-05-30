@@ -14,7 +14,7 @@ const routes = [
 		...questionnaireRouter,
 	},
 	{
-		path: '/admin',
+		path:'/admin',
 		...adminRouter,
 	}
 ]
