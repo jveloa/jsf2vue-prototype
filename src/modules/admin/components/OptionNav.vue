@@ -1,112 +1,90 @@
 <template >
-    <SideBar :visible="store.visible" :baseZIndex="10000" position="left" @update:visible="changeVisible">
-        <MegaMenu
-            :model="items"
-            class="bg-green-100 border-round-2xl"
-            orientation="vertical"
-        />
+    <SideBar
+        :visible="store.visible"
+        :baseZIndex="10000"
+        position="left"
+        @update:visible="changeVisible"
+    >
+        <Menu :model="items" class="w-full">
+            <template #items="{ item }">
+                <router-link
+                    :to="item.to"
+                    custom v-slot="{ href, route, navigate, isActive, isExactActive }"
+                >
+                    <a
+                        :href="href"
+                        @click="navigate"
+                        :class="{
+                            'active-link': isActive,
+                            'active-link-exact': isExactActive,
+                        }"
+                    >
+                        {{ route.fullPath }}
+                    </a>
+                </router-link>
+            </template>
+        </Menu>
     </SideBar>
 </template>
 
 <script>
-import MegaMenu from "primevue/megamenu";
+import Menu from "primevue/menu";
 import SideBar from "primevue/sidebar";
 import { ref } from "vue";
-import {useSideBarStore} from '@/store/SideBarStore'
+import { useSideBarStore } from "@/store/SideBarStore";
 export default {
-    components: { MegaMenu, SideBar },
+    components: { Menu, SideBar },
     setup() {
+        const store = useSideBarStore();
+        const { changeVisible } = store;
         const items = ref([
             {
-                label: "Videos",
-                icon: "pi pi-fw pi-video",
+                label: "Opciones",
                 items: [
-                    [
-                        {
-                            label: "Video 3",
-                            items: [
-                                { label: "Video 3.1" },
-                                { label: "Video 3.2" },
-                            ],
+                    {
+                        label: "Admin",
+                        icon: "pi pi-home",
+                        to: { name: "admin" },
+                        command: () => {
+                            store.changeVisible();
                         },
-                        {
-                            label: "Video 4",
-                            items: [
-                                { label: "Video 4.1" },
-                                { label: "Video 4.2" },
-                            ],
+                    },
+                    {
+                        label: "Questionario",
+                        icon: "pi pi-question",
+                        to: { name: 'questionnaire-form' },
+                        command: () => {
+                            store.changeVisible();
                         },
-                    ],
+                    },
                 ],
             },
             {
-                label: "Users",
-                icon: "pi pi-fw pi-users",
+                label: "Reportes",
                 items: [
-                    [
-                        {
-                            label: "User 3",
-                            items: [
-                                { label: "User 3.1" },
-                                { label: "User 3.2" },
-                            ],
-                        },
-                    ],
-                ],
-            },
-            {
-                label: "Events",
-                icon: "pi pi-fw pi-calendar",
-                items: [
-                    [
-                        {
-                            label: "Event 1",
-                            items: [
-                                { label: "Event 1.1" },
-                                { label: "Event 1.2" },
-                            ],
-                        },
-                        {
-                            label: "Event 2",
-                            items: [
-                                { label: "Event 2.1" },
-                                { label: "Event 2.2" },
-                            ],
-                        },
-                    ],
-                    [
-                        {
-                            label: "Event 3",
-                            items: [
-                                { label: "Event 3.1" },
-                                { label: "Event 3.2" },
-                            ],
-                        },
-                        {
-                            label: "Event 4",
-                            items: [
-                                { label: "Event 4.1" },
-                                { label: "Event 4.2" },
-                            ],
-                        },
-                    ],
+                    {
+                        label: "Example 1",
+                        icon: "pi pi-filter",
+                        to: "/",
+                    },
+                    {
+                        label: "Example 2",
+                        icon: "pi pi-filter",
+                        to: "/",
+                    },
                 ],
             },
         ]);
-		const store = useSideBarStore();
-		const { changeVisible } = store;
+
         return {
-			changeVisible,
+            changeVisible,
             items,
-			store,
-            
+            store,
         };
     },
 };
 </script>
 
-<style scoped >
-.p-panelmenu {
-    width: 22rem;
-}
+<style  scope>
+
 </style>
